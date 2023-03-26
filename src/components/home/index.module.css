@@ -1,0 +1,7 @@
+.home{
+    display: flex;
+}
+.home .right{
+    width: calc(100% - 300px);
+    padding: 20px;
+}
