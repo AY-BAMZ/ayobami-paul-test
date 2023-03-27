@@ -81,8 +81,6 @@ input{
   border: 1px solid var(--stroke);
   font-family: var(--font-family);
   width: 100%;
-  /* width: calc(100% - 20px); */
-  /* outline: none; */
 }
 
 select{
@@ -114,6 +112,7 @@ button{
   font-size: 16px;
   font-weight: 500;
   border: 0;
+  cursor: pointer;
 }
 .btnTwo{
   height: 40px;
@@ -145,7 +144,7 @@ li{
 }
 
 p{
-  width: 100%;
+  /* width: 100%; */
   font-family: var(--font-family);
   font-size: 14px;
 }
@@ -161,26 +160,36 @@ table{
   margin: 24px 0;
   overflow-x: scroll;
   overflow: hidden;
+  width: 100%;
 }
 tr{
   margin-bottom: 50px;
+  width: 100%;
+}
+thead{
+  width: 100% !important;
 }
 tbody tr:hover{
-  cursor: pointer;
   background-color: #17173f20;
 }
 th{
   border-bottom: 1px solid #ddd;
   text-transform: uppercase;
   font-weight: 400;
-  color: var(--text-inactive);
-  padding: 12px 0 ;
+  color: var(--background);
+  background-color: var(--primary-color);
+  padding: 16px 12px ;
   padding-right: 32px;
+  min-width: 160px;
+  font-size: 16px;
 }
 td{
   border-bottom: 1px solid #ddd;
   font-weight: 400;
-  padding: 12px 0 ;
+  font-size: 16px;
+  padding: 16px 12px ;
+  min-width: 160px;
+  max-width: 25%;
   padding-right: 12px;
 }
 #table{
@@ -212,3 +221,11 @@ td{
 ::-webkit-scrollbar-thumb:hover {
   background: #bb790080; 
 }
+  a{
+    list-style: none;
+    text-decoration: none;
+    /* border-bottom: 1px solid #ddd; */
+  font-weight: 500;
+  font-size: 16px;
+    color: var(--primary-color);
+  }

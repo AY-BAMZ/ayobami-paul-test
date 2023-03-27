@@ -1,13 +1,26 @@
 import React from 'react';
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import RenderProduct from './components/individualProduct/RenderProduct';
+import RenderEditProduct from './components/edit_product/RenderEditProduct';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/product/:id" element={<RenderProduct />} />
+        <Route path="/product/edit/:id" element={<RenderEditProduct />} />
+      </Routes>
+    </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -3,13 +3,17 @@ import styles from "./index.module.css";
 import TableBody from "./TableBody";
 import { useDispatch, useSelector } from "react-redux";
 import { switchDisplay, fetchProducts } from "../../redux";
+import { ImList2 } from "react-icons/im";
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import Card from "./Cards";
 
 function ProductLists() {
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
-
   const productLists = useSelector((state) => state.productList.products);
+  console.log('productLists', productLists)
+  useEffect(() => {
+    if (productLists.length < 1) dispatch(fetchProducts());
+  }, [productLists]);
+
   const currentTableDisplay = useSelector(
     (state) => state.tableDisplay.currentTableDisplay
   );
@@ -20,36 +24,63 @@ function ProductLists() {
       <div className={styles.container}>
         <div className={styles.table}>
           <div className={styles.displays}>
-            <div
-              className={styles.display}
-              onClick={() => dispatch(switchDisplay("card"))}
-            >
-              {currentTableDisplay}
-            </div>
-            <div
-              className={styles.display}
-              onClick={() => dispatch(switchDisplay("row"))}
-            >
-              {currentTableDisplay}
+            <h3>Products</h3>
+            <div className={styles.switchContainer}>
+              <h6>Switch Display:</h6>
+              <div className={styles.switch}>
+                <div
+                  title="Card view"
+                  className={
+                    currentTableDisplay === "row"
+                      ? styles.activeDisplay
+                      : styles.display
+                  }
+                  onClick={() => dispatch(switchDisplay("row"))}
+                >
+                  <ImList2 />
+                </div>
+                <div
+                  title="List view"
+                  className={
+                    currentTableDisplay === "card"
+                      ? styles.activeDisplay
+                      : styles.display
+                  }
+                  onClick={() => dispatch(switchDisplay("card"))}
+                >
+                  <BsFillGrid3X3GapFill />
+                </div>
+              </div>
             </div>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>title</th>
-                <th>description</th>
-                <th>price</th>
-                <th>photo</th>
-                <th>rating</th>
-                <th>stock</th>
-                <th>category</th>
-              </tr>
-            </thead>
-            <tbody>
-              <TableBody data={productLists.products} />
-            </tbody>
-          </table>
+          {currentTableDisplay === "row" && (
+            <div className={styles.table}>
+              
+            <table>
+              <thead>
+                <tr>
+                  <th className={styles.tableId}>ID</th>
+                  <th>photo</th>
+                  <th>title</th>
+                  <th>description</th>
+                  <th>price</th>
+                  <th>rating</th>
+                  <th>stock</th>
+                  <th>category</th>
+                  <th>Delete/edit </th>
+                </tr>
+              </thead>
+              <tbody>
+                <TableBody data={productLists} />
+              </tbody>
+            </table>
+            </div>
+          )}
+          {currentTableDisplay === "card" && (
+            <div className={styles.grid}>
+              <Card data={productLists} />
+            </div>
+          )}
         </div>
       </div>
     </div>

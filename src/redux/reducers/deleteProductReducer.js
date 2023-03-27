@@ -1,6 +1,6 @@
-import { FETCH_PRODUCT_FAILURE } from "../types/getProductTypes"
-import { FETCH_PRODUCT_SUCCESS } from "../types/getProductTypes"
-import { FETCH_PRODUCT_REQUEST } from "../types/getProductTypes"
+import { DELETE_PRODUCT_FAILURE } from "../types/deleteProductTypes"
+import { DELETE_PRODUCT_SUCCESS } from "../types/deleteProductTypes"
+import { DELETE_PRODUCT_REQUEST } from "../types/deleteProductTypes"
 
 const initialProductList = {
     loading: true,
@@ -10,18 +10,18 @@ const initialProductList = {
 
 const reducer = (state = initialProductList, action) => {
     switch (action.type) {
-        case FETCH_PRODUCT_REQUEST: 
+        case DELETE_PRODUCT_REQUEST: 
         return {
             ...state,
             loading: true
         }
-        case FETCH_PRODUCT_SUCCESS: 
+        case DELETE_PRODUCT_SUCCESS: 
         return {
             loading: false,
             products: action.payload,
             error: '',
         }
-        case FETCH_PRODUCT_FAILURE: 
+        case DELETE_PRODUCT_FAILURE: 
         return {
             loading: false,
             products: [],

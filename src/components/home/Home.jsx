@@ -4,6 +4,8 @@ import Search from "../products/Search";
 import Sidebar from "../sidebar/Sidebar";
 import styles from "./index.module.css";
 import { useSelector } from "react-redux";
+import CreateProduct from "../create_product/CreateProduct";
+import MobileSidebar from "../sidebar/MobileSidebar";
 
 function Home() {
   const currentSidebarDisplay = useSelector(
@@ -15,6 +17,7 @@ function Home() {
       <div className={styles.left}>
         <Sidebar />
       </div>
+        <MobileSidebar />
       <div className={styles.right}>
         {currentSidebarDisplay === "products" && (
           <>
@@ -24,7 +27,7 @@ function Home() {
         )}
         {currentSidebarDisplay === "create_product" && (
           <>
-            <h1>hello there</h1>
+            <CreateProduct />
           </>
         )}
       </div>

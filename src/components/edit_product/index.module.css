@@ -1,0 +1,39 @@
+.edit{
+    display: flex;
+}
+.edit .right{
+    width: calc(100% - 300px);
+    padding: 20px;
+    height: 100vh;
+    overflow-y: scroll;
+}
+.editProduct{
+    background-color: var(--background);
+    min-height: 90vh;
+}
+.editProduct .container{
+    padding: 25px;
+}
+.editProduct .container h3{
+    margin-bottom: 20px;
+    width: 100%;
+}
+.editProduct .container .formik{
+    
+} 
+.editProduct .container .form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: auto;
+    max-width: 1000px;
+}
+.editProduct .container .input{
+    width: 48%;
+    margin-bottom: 20px;
+}
+.editProduct .container .input label{
+}
+.editProduct .container button{
+    width: 100%;
+}

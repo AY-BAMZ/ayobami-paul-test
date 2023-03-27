@@ -6,21 +6,14 @@ import { IoIosCreate } from "react-icons/io";
 import { CiShoppingBasket } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
-function Sidebar() {
+function MobileSidebar() {
   const dispatch = useDispatch();
   const currentSidebarDisplay = useSelector(
     (state) => state.sidebarDisplay.currentSidebarDisplay
   );
   return (
-    <div className={styles.sidebar}>
+    <div className={styles.mobileSidebar}>
       <div className={styles.container}>
-        <div className={styles.user}>
-          <img
-            src="https://res.cloudinary.com/dmixz7eur/image/upload/v1644948142/DSC_8169-2_h0o0hh.jpg"
-            alt=""
-          />
-          <h5>Gabriel Zincheko</h5>
-        </div>
         <div className={styles.sideLinks}>
           <Link to={"/"}>
             <li
@@ -54,4 +47,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default MobileSidebar;

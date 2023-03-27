@@ -1,7 +1,24 @@
 .home{
     display: flex;
+    flex-wrap: wrap;
 }
 .home .right{
     width: calc(100% - 300px);
     padding: 20px;
+    height: 100vh;
+    overflow-y: scroll;
+}
+.mobileSidebar{
+    display: none;
+}
+.home .left{
+    display: block;
+}
+@media only screen and (max-width: 768px) {
+    .home .right{
+        width: 100%;
+    }
+    .home .left{
+        display: none;
+    }
 }

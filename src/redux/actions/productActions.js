@@ -1,4 +1,5 @@
 import axios from "axios";
+import URI_MAP from "../../URI/URI_MAP";
 import {
   FETCH_PRODUCT_FAILURE,
   FETCH_PRODUCT_SUCCESS,
@@ -28,7 +29,29 @@ const fetchProductFailure = (error) => {
 export const fetchProducts = () => {
   return (dispatch) => {
       dispatch(fetchProductRequest)
-    axios.get("https://dummyjson.com/products" ,  { 
+    axios.get(URI_MAP.dummy_products.products ,  { 
+        headers: { "Accept-Encoding": "application.json" } 
+    })
+      .then((response) => {
+        const products = response.data;
+        dispatch(fetchProductSuccess(products));
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(fetchProductFailure(errorMsg));
+      });
+  };
+};
+
+export const searchProduct = (searchParm) => {
+  const params = {
+    q: searchParm,
+  };
+  return (dispatch) => {
+      dispatch(fetchProductRequest)
+    axios.get(`${URI_MAP.dummy_products.search}?${new URLSearchParams(
+      params
+    ).toString()}`,  { 
         headers: { "Accept-Encoding": "application.json" } 
     })
       .then((response) => {

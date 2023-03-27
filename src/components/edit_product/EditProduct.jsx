@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./index.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategory, createProduct } from "../../redux";
+import { editProduct, fetchCategory } from "../../redux";
 import { useNavigate } from "react-router-dom";
 
-function CreateProduct() {
+function EditProduct(props) {
   const dispatch = useDispatch();
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchCategory());
@@ -17,11 +17,11 @@ function CreateProduct() {
   // const [files, setfiles] = useState([])
   const categoryOptions = useSelector((state) => state.category.categories);
 
-  const newProduct = useSelector((state) => state.product.new_product);
+  const newProduct = useSelector((state) => state.editProduct.edit_product);
 
   const handleNavigateProductPage = () => {
-    navigate("/product/" + newProduct.id)
-  }
+    navigate("/product/" + newProduct.id);
+  };
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -34,29 +34,32 @@ function CreateProduct() {
   });
 
   return (
-    <div className={styles.createProduct}>
+    <div className={styles.editProduct}>
       <div className={styles.container}>
         <Formik
           initialValues={{
-            title: "",
-            description: "",
-            price: "",
-            stock: "",
-            selectCategory: "",
-            rating: "",
-            brand: "",
+            title: props.title,
+            description: props.description,
+            price: props.price,
+            stock: props.stock,
+            selectCategory: props.selectCategory,
+            rating: props.rating,
+            brand: props.brand,
+            id: props.id,
             // files: [],
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
+            console.log({ values });
             setSubmitting(false);
-            dispatch(createProduct(values));
+            dispatch(editProduct(values))
+            handleNavigateProductPage()
+            
           }}
         >
           {({ values, isSubmitting, setFieldValue }) => (
             <Form className={styles.form}>
-              <h3>Create Product</h3>
+              <h3>Edit Product</h3>
               <div className={styles.input}>
                 <label htmlFor="name">Name</label>
                 <Field type="text" name="title" />
@@ -90,7 +93,7 @@ function CreateProduct() {
               <div className={styles.input}>
                 <label htmlFor="rating">Category</label>
                 <Field name="selectCategory" as="select">
-                  <option value="">Select an option</option>
+                  <option value={props.category}>{props.category}</option>
                   {categoryOptions?.map((option) => (
                     <option key={option.value} value={option}>
                       {option}
@@ -99,32 +102,8 @@ function CreateProduct() {
                 </Field>
                 <ErrorMessage name="selectCategory" />
               </div>
-              {/* <div className={styles.input}>
-                <label htmlFor="files">Add files</label>
-                <Field
-                  name="files"
-                  type="file"
-                  multiple
-                  as={() => (
-                    <input
-                      // name="files"
-                      // value={values.files}
-
-                      type="file"
-                      onChange={(e) => {
-                        console.log("files", e);
-                        setFieldValue("files", e.target.files);
-                      }}
-                      multiple
-                    />
-                  )}
-                  // value={files}
-                />
-                <p>{values.files.length} image files selected</p>
-                <ErrorMessage name="files" />
-              </div> */}
-              <button type="submit" onClick={handleNavigateProductPage} disabled={isSubmitting}>
-                Create Product
+              <button type="submit" disabled={isSubmitting}>
+                Save Changes
               </button>
             </Form>
           )}
@@ -134,4 +113,4 @@ function CreateProduct() {
   );
 }
 
-export default CreateProduct;
+export default EditProduct;
