@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { switchDisplay, fetchProducts } from "../../redux";
 import { ImList2 } from "react-icons/im";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { FaSort } from "react-icons/fa";
 import Card from "./Cards";
 
 function ProductLists() {
@@ -59,14 +60,14 @@ function ProductLists() {
             <table>
               <thead>
                 <tr>
-                  <th className={styles.tableId}>ID</th>
-                  <th>photo</th>
-                  <th>title</th>
-                  <th>description</th>
-                  <th>price</th>
-                  <th>rating</th>
-                  <th>stock</th>
-                  <th>category</th>
+                  <th className={styles.tableId}>ID  <FaSort /></th>
+                  <th>photo </th>
+                  <th>title <FaSort /></th>
+                  <th>description <FaSort /></th>
+                  <th>price <FaSort /></th>
+                  <th>rating <FaSort /></th>
+                  <th>stock <FaSort /></th>
+                  <th>category <FaSort /></th>
                   <th>Delete/edit </th>
                 </tr>
               </thead>

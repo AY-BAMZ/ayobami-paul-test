@@ -28,3 +28,12 @@
 .createProduct .container button{
     width: 100%;
 }
+
+@media only screen and (max-width: 768px){
+    .createProduct .container .input{
+        width: 100%;
+    }
+    .createProduct .container{
+        padding-bottom: 80px;
+    }
+}

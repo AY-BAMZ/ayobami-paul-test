@@ -37,3 +37,21 @@
 .editProduct .container button{
     width: 100%;
 }
+.editProduct  h5{
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+@media only screen and (max-width: 768px){
+    .edit .right{
+        width: 100%;
+    }
+    .edit .left{
+        display: none;
+    }
+    .editProduct .container .input{
+        width: 100%;
+    }
+    .editProduct .container{
+        padding-bottom: 80px;
+    }
+}

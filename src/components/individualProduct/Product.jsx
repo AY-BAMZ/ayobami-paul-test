@@ -3,12 +3,12 @@ import styles from "./index.module.css";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, unstable_HistoryRouter, useNavigate } from "react-router-dom";
 
 function Product(props) {
   const dispatch = useDispatch();
   let navigate = useNavigate();
-
+  // let history = unstable_HistoryRouter();
   const handleDelete = (id) => {
     const result = window.confirm(
       "Are you sure you want yo delete this product"
@@ -22,6 +22,7 @@ function Product(props) {
   return (
     <div className={styles.productPage}>
       <div className={styles.container}>
+        <h5 onClick={() => navigate(-1)}>Back</h5>
         <div className={styles.row}>
           <div className={styles.col}>
             <div className={styles.image}>

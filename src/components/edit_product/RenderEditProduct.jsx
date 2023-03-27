@@ -5,6 +5,7 @@ import { fetchProducts } from "../../redux";
 import EditProduct from "./EditProduct";
 import styles from "./index.module.css";
 import Sidebar from "../sidebar/Sidebar";
+import MobileSidebar from "../sidebar/MobileSidebar";
 
 function RenderEditProduct() {
   let { id } = useParams();
@@ -28,6 +29,7 @@ function RenderEditProduct() {
       <div className={styles.left}>
         <Sidebar />
       </div>
+      <MobileSidebar />
       <div className={styles.right}>
         <EditProduct {...getSingleProduct(id)}/>
       </div>

@@ -5,6 +5,7 @@ import Product from './Product'
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux";
+import MobileSidebar from '../sidebar/MobileSidebar';
 
 function RenderProduct() {
   let { id } = useParams();
@@ -27,6 +28,7 @@ function RenderProduct() {
       <div className={styles.left}>
         <Sidebar />
       </div>
+      <MobileSidebar />
       <div className={styles.right}>
           <>
             <Product {...getSingleProduct(id)}/>

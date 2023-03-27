@@ -36,6 +36,7 @@ function EditProduct(props) {
   return (
     <div className={styles.editProduct}>
       <div className={styles.container}>
+      <h5 onClick={() => navigate(-1)}>Back</h5>
         <Formik
           initialValues={{
             title: props.title,

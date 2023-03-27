@@ -49,6 +49,10 @@
     font-weight: 400;
     color: #999;
 }
+.productPage  h5{
+    margin-bottom: 20px;
+    cursor: pointer;
+}
 .productPage .row .productDetails h6 span{
     color: var(--primary-color);
 }
@@ -69,4 +73,17 @@
 }
 .productPage .row .buttons .delete{
     background-color: red;
+}
+
+@media only screen and (max-width: 768px) {
+    .individualProduct .right{
+        width: 100%;
+    }
+    .individualProduct .left{
+        display: none;
+    }
+    .productPage .row .col{
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }
