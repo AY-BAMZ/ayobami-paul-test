@@ -23,6 +23,7 @@ const reducer = (state = initialProductList, action) => {
       };
     case FETCH_PRODUCT_SUCCESS:
       return {
+        ...state,
         loading: false,
         ...action.payload,
         error: "",

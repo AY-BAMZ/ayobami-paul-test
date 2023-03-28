@@ -2,18 +2,40 @@ import React, { useEffect } from "react";
 import styles from "./index.module.css";
 import TableBody from "./TableBody";
 import { useDispatch, useSelector } from "react-redux";
-import { switchDisplay, fetchProducts } from "../../redux";
+import { switchDisplay, fetchProducts, fetchProductSuccess } from "../../redux";
 import { ImList2 } from "react-icons/im";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { FaSort } from "react-icons/fa";
 import Card from "./Cards";
 
 function ProductLists() {
-  const productLists = useSelector((state) => state.productList.products);
-  console.log('productLists', productLists)
+  const productLists = useSelector((state) => state.productList);
+  const sortByNumericValue = (colName) => {
+    productLists.products.sort((a, b) => a[colName] - b[colName]);
+
+    dispatch(
+      fetchProductSuccess({
+        products: productLists.products,
+      })
+    );
+  };
+
+  const sortCol = (col) => {
+    productLists.products.sort((a, b) => {
+      if (a[col].toLowerCase() < b[col].toLowerCase()) return -1;
+      if (a[col].toLowerCase() > b[col].toLowerCase()) return 1;
+      return 0;
+    });
+    dispatch(
+      fetchProductSuccess({
+        products: productLists.products,
+      })
+    );
+  };
+
   useEffect(() => {
-    if (productLists.length < 1) dispatch(fetchProducts());
-  }, [productLists]);
+    if (productLists.products.length < 1) dispatch(fetchProducts());
+  }, [productLists.products]);
 
   const currentTableDisplay = useSelector(
     (state) => state.tableDisplay.currentTableDisplay
@@ -56,30 +78,58 @@ function ProductLists() {
           </div>
           {currentTableDisplay === "row" && (
             <div className={styles.table}>
-              
-            <table>
-              <thead>
-                <tr>
-                  <th className={styles.tableId}>ID  <FaSort /></th>
-                  <th>photo </th>
-                  <th>title <FaSort /></th>
-                  <th>description <FaSort /></th>
-                  <th>price <FaSort /></th>
-                  <th>rating <FaSort /></th>
-                  <th>stock <FaSort /></th>
-                  <th>category <FaSort /></th>
-                  <th>Delete/edit </th>
-                </tr>
-              </thead>
-              <tbody>
-                <TableBody data={productLists} />
-              </tbody>
-            </table>
+              <table>
+                <thead>
+                  <tr>
+                    <th className={styles.tableId}>
+                      ID{" "}
+                      <FaSort
+                        onClick={() => sortByNumericValue("id")}
+                        title="sort by title"
+                      />
+                    </th>
+                    <th>photo </th>
+                    <th>
+                      title{" "}
+                      <FaSort
+                        onClick={() => sortCol("title")}
+                        title="sort by title"
+                      />
+                    </th>
+                    <th>
+                      description
+                      <FaSort
+                        onClick={() => sortCol("description")}
+                        title="sort by title"
+                      />
+                    </th>
+                    <th>
+                      price{" "}
+                      <FaSort onClick={() => sortByNumericValue("price")} />
+                    </th>
+                    <th>
+                      rating{" "}
+                      <FaSort onClick={() => sortByNumericValue("rating")} />
+                    </th>
+                    <th>
+                      stock{" "}
+                      <FaSort onClick={() => sortByNumericValue("stock")} />
+                    </th>
+                    <th>
+                      category <FaSort onClick={() => sortCol("category")} />
+                    </th>
+                    <th>Delete/edit </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <TableBody data={productLists.products} />
+                </tbody>
+              </table>
             </div>
           )}
           {currentTableDisplay === "card" && (
             <div className={styles.grid}>
-              <Card data={productLists} />
+              <Card data={productLists.products} />
             </div>
           )}
         </div>

@@ -12,7 +12,7 @@ export const fetchProductRequest = () => {
   };
 };
 
-const fetchProductSuccess = (product) => {
+export const fetchProductSuccess = (product) => {
   return {
     type: FETCH_PRODUCT_SUCCESS,
     payload: product,
